@@ -44,6 +44,9 @@ namespace DG.XrmMockupTest
 
             var retrieved = orgAdminService.Retrieve(email.LogicalName, email.Id, new ColumnSet(true)).ToEntity<Email>();
 
+            Assert.NotNull(retrieved.To);
+            Assert.NotNull(retrieved.From);
+
             using (var context = new Xrm(orgAdminService))
             {
                 var ap = context.ActivityPointerSet.FirstOrDefault(a => a.Id == email.Id);
